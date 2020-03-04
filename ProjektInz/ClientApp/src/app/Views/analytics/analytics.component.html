@@ -1,0 +1,8 @@
+<chart-view [lineChartLabels]="chartLabel" [lineChartData]="chart" [lineChartColors]="axesColors"></chart-view>
+<mat-form-field>
+  <mat-label>Wybierz datę</mat-label>
+  <input matInput [matDatepicker]="picker" [formControl]="date" (dateChange)="dateChange('change',$event)">
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
+<!--<chart-view [chart1]="value1" (changeAxis1)="getDataFromApi()"></chart-view>-->

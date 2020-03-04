@@ -1,0 +1,18 @@
+body {
+  background-color: #fafafa;
+}
+mat-grid-tile {
+  background: #FFC300;
+  border-radius: 15px;
+}
+mat-grid-list{
+  
+}
+container {
+margin:20px;
+}
+
+.card-component-chart {
+  width: 100%;
+  max-width:550px;
+}

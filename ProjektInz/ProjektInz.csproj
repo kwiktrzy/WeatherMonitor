@@ -1,0 +1,718 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
+    <IsPackable>false</IsPackable>
+    <SpaRoot>ClientApp\</SpaRoot>
+    <DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**</DefaultItemExcludes>
+
+    <!-- Set this to true if you enable server-side prerendering -->
+    <BuildServerSideRenderer>false</BuildServerSideRenderer>
+    <UserSecretsId>bc581b90-ce08-486a-9793-58bb6691d19f</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EntityFramework" Version="6.4.0" />
+    <PackageReference Include="Mapster" Version="4.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="2.9.7">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.7">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.CodeQuality.Analyzers" Version="2.9.7">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="2.2.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Analyzers" Version="2.2.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="2.2.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.Design" Version="1.1.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.2.6">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="2.2.0" />
+    <PackageReference Include="Microsoft.IdentityModel.Protocols" Version="5.6.0" />
+    <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="3.5.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.9.5" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.4" />
+    <PackageReference Include="MSTest.TestFramework" Version="2.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Don't publish the SPA source files, but do show them in the project files list -->
+    <Content Remove="$(SpaRoot)**" />
+    <Content Remove="ClientApp\src\websocket-node-express\**" />
+    <Content Remove="Data\**" />
+    <None Remove="$(SpaRoot)**" />
+    <None Remove="ClientApp\src\websocket-node-express\**" />
+    <None Remove="Data\**" />
+    <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="ClientApp\src\websocket-node-express\**" />
+    <Compile Remove="Data\**" />
+    <EmbeddedResource Remove="ClientApp\src\websocket-node-express\**" />
+    <EmbeddedResource Remove="Data\**" />
+    <TypeScriptCompile Remove="ClientApp\src\websocket-node-express\**" />
+    <TypeScriptCompile Remove="Data\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="GetWeatherFromApi.cs" />
+    <Compile Remove="TimedHostedService.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="ClientApp\src\app\interfaces\axis.ts" />
+    <None Remove="ClientApp\src\app\interfaces\forecast.ts" />
+    <None Remove="ClientApp\src\assets\hotWeather.svg" />
+    <None Remove="ClientApp\src\websocket-node-express\cert.pem" />
+    <None Remove="ClientApp\src\websocket-node-express\dist\server\server.js" />
+    <None Remove="ClientApp\src\websocket-node-express\dist\server\server.js.map" />
+    <None Remove="ClientApp\src\websocket-node-express\key.pem" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\body-parser\index.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\body-parser\LICENSE" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\body-parser\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\body-parser\README.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\connect\index.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\connect\LICENSE" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\connect\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\connect\README.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\events\index.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\events\LICENSE" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\events\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\events\README.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\express-serve-static-core\index.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\express-serve-static-core\LICENSE" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\express-serve-static-core\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\express-serve-static-core\README.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\express\index.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\express\LICENSE" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\express\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\express\README.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\mime\index.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\mime\LICENSE" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\mime\Mime.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\mime\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\mime\README.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\node\assert.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\node\async_hooks.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\node\base.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\node\buffer.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\node\child_process.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\node\cluster.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\node\console.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\node\constants.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\node\crypto.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\node\dgram.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\node\dns.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\node\domain.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\node\events.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\node\fs.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\node\globals.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\node\http.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\node\http2.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\node\https.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\node\index.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\node\inspector.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\node\LICENSE" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\node\module.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\node\net.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\node\os.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\node\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\node\path.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\node\perf_hooks.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\node\process.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\node\punycode.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\node\querystring.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\node\readline.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\node\README.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\node\repl.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\node\stream.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\node\string_decoder.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\node\timers.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\node\tls.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\node\trace_events.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\node\ts3.2\globals.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\node\ts3.2\index.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\node\ts3.2\util.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\node\tty.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\node\url.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\node\util.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\node\v8.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\node\vm.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\node\worker_threads.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\node\zlib.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\range-parser\index.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\range-parser\LICENSE" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\range-parser\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\range-parser\README.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\serve-static\index.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\serve-static\LICENSE" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\serve-static\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\serve-static\README.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\ws\index.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\ws\LICENSE" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\ws\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\%40types\ws\README.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\.bin\mime" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\.bin\mime.cmd" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\.bin\tsc" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\.bin\tsc.cmd" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\.bin\tsserver" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\.bin\tsserver.cmd" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\accepts\HISTORY.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\accepts\index.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\accepts\LICENSE" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\accepts\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\accepts\README.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\array-flatten\array-flatten.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\array-flatten\LICENSE" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\array-flatten\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\array-flatten\README.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\async-limiter\.travis.yml" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\async-limiter\coverage\coverage.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\async-limiter\coverage\lcov-report\async-throttle\index.html" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\async-limiter\coverage\lcov-report\async-throttle\index.js.html" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\async-limiter\coverage\lcov-report\base.css" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\async-limiter\coverage\lcov-report\index.html" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\async-limiter\coverage\lcov-report\prettify.css" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\async-limiter\coverage\lcov-report\prettify.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\async-limiter\coverage\lcov-report\sort-arrow-sprite.png" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\async-limiter\coverage\lcov-report\sorter.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\async-limiter\coverage\lcov.info" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\async-limiter\index.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\async-limiter\LICENSE" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\async-limiter\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\async-limiter\readme.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\body-parser\HISTORY.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\body-parser\index.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\body-parser\lib\read.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\body-parser\lib\types\json.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\body-parser\lib\types\raw.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\body-parser\lib\types\text.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\body-parser\lib\types\urlencoded.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\body-parser\LICENSE" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\body-parser\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\body-parser\README.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\bytes\History.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\bytes\index.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\bytes\LICENSE" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\bytes\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\bytes\Readme.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\content-disposition\HISTORY.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\content-disposition\index.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\content-disposition\LICENSE" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\content-disposition\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\content-disposition\README.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\content-type\HISTORY.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\content-type\index.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\content-type\LICENSE" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\content-type\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\content-type\README.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\cookie-signature\.npmignore" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\cookie-signature\History.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\cookie-signature\index.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\cookie-signature\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\cookie-signature\Readme.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\cookie\HISTORY.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\cookie\index.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\cookie\LICENSE" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\cookie\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\cookie\README.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\debug\.coveralls.yml" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\debug\.eslintrc" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\debug\.npmignore" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\debug\.travis.yml" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\debug\CHANGELOG.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\debug\component.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\debug\karma.conf.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\debug\LICENSE" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\debug\Makefile" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\debug\node.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\debug\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\debug\README.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\debug\src\browser.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\debug\src\debug.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\debug\src\index.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\debug\src\inspector-log.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\debug\src\node.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\depd\History.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\depd\index.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\depd\lib\browser\index.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\depd\lib\compat\callsite-tostring.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\depd\lib\compat\event-listener-count.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\depd\lib\compat\index.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\depd\LICENSE" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\depd\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\depd\Readme.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\destroy\index.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\destroy\LICENSE" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\destroy\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\destroy\README.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\ee-first\index.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\ee-first\LICENSE" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\ee-first\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\ee-first\README.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\encodeurl\HISTORY.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\encodeurl\index.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\encodeurl\LICENSE" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\encodeurl\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\encodeurl\README.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\escape-html\index.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\escape-html\LICENSE" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\escape-html\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\escape-html\Readme.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\etag\HISTORY.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\etag\index.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\etag\LICENSE" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\etag\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\etag\README.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\express\History.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\express\index.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\express\lib\application.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\express\lib\express.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\express\lib\middleware\init.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\express\lib\middleware\query.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\express\lib\request.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\express\lib\response.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\express\lib\router\index.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\express\lib\router\layer.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\express\lib\router\route.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\express\lib\utils.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\express\lib\view.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\express\LICENSE" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\express\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\express\Readme.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\finalhandler\HISTORY.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\finalhandler\index.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\finalhandler\LICENSE" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\finalhandler\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\finalhandler\README.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\forwarded\HISTORY.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\forwarded\index.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\forwarded\LICENSE" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\forwarded\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\forwarded\README.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\fresh\HISTORY.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\fresh\index.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\fresh\LICENSE" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\fresh\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\fresh\README.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\http-errors\HISTORY.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\http-errors\index.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\http-errors\LICENSE" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\http-errors\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\http-errors\README.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\iconv-lite\Changelog.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\iconv-lite\encodings\dbcs-codec.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\iconv-lite\encodings\dbcs-data.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\iconv-lite\encodings\index.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\iconv-lite\encodings\internal.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\iconv-lite\encodings\sbcs-codec.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\iconv-lite\encodings\sbcs-data-generated.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\iconv-lite\encodings\sbcs-data.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\iconv-lite\encodings\tables\big5-added.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\iconv-lite\encodings\tables\cp936.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\iconv-lite\encodings\tables\cp949.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\iconv-lite\encodings\tables\cp950.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\iconv-lite\encodings\tables\eucjp.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\iconv-lite\encodings\tables\gb18030-ranges.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\iconv-lite\encodings\tables\gbk-added.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\iconv-lite\encodings\tables\shiftjis.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\iconv-lite\encodings\utf16.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\iconv-lite\encodings\utf7.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\iconv-lite\lib\bom-handling.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\iconv-lite\lib\extend-node.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\iconv-lite\lib\index.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\iconv-lite\lib\index.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\iconv-lite\lib\streams.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\iconv-lite\LICENSE" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\iconv-lite\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\iconv-lite\README.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\inherits\inherits.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\inherits\inherits_browser.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\inherits\LICENSE" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\inherits\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\inherits\README.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\ipaddr.js\ipaddr.min.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\ipaddr.js\lib\ipaddr.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\ipaddr.js\lib\ipaddr.js.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\ipaddr.js\LICENSE" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\ipaddr.js\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\ipaddr.js\README.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\media-typer\HISTORY.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\media-typer\index.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\media-typer\LICENSE" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\media-typer\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\media-typer\README.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\merge-descriptors\HISTORY.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\merge-descriptors\index.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\merge-descriptors\LICENSE" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\merge-descriptors\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\merge-descriptors\README.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\methods\HISTORY.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\methods\index.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\methods\LICENSE" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\methods\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\methods\README.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\mime-db\db.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\mime-db\HISTORY.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\mime-db\index.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\mime-db\LICENSE" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\mime-db\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\mime-db\README.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\mime-types\HISTORY.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\mime-types\index.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\mime-types\LICENSE" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\mime-types\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\mime-types\README.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\mime\.npmignore" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\mime\CHANGELOG.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\mime\cli.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\mime\LICENSE" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\mime\mime.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\mime\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\mime\README.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\mime\src\build.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\mime\src\test.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\mime\types.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\ms\index.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\ms\license.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\ms\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\ms\readme.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\negotiator\HISTORY.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\negotiator\index.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\negotiator\lib\charset.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\negotiator\lib\encoding.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\negotiator\lib\language.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\negotiator\lib\mediaType.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\negotiator\LICENSE" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\negotiator\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\negotiator\README.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\on-finished\HISTORY.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\on-finished\index.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\on-finished\LICENSE" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\on-finished\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\on-finished\README.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\parseurl\HISTORY.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\parseurl\index.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\parseurl\LICENSE" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\parseurl\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\parseurl\README.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\path-to-regexp\History.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\path-to-regexp\index.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\path-to-regexp\LICENSE" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\path-to-regexp\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\path-to-regexp\Readme.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\proxy-addr\HISTORY.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\proxy-addr\index.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\proxy-addr\LICENSE" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\proxy-addr\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\proxy-addr\README.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\qs\.editorconfig" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\qs\.eslintignore" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\qs\.eslintrc" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\qs\CHANGELOG.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\qs\dist\qs.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\qs\lib\formats.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\qs\lib\index.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\qs\lib\parse.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\qs\lib\stringify.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\qs\lib\utils.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\qs\LICENSE" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\qs\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\qs\README.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\qs\test\.eslintrc" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\qs\test\index.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\qs\test\parse.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\qs\test\stringify.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\qs\test\utils.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\range-parser\HISTORY.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\range-parser\index.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\range-parser\LICENSE" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\range-parser\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\range-parser\README.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\raw-body\HISTORY.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\raw-body\index.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\raw-body\index.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\raw-body\LICENSE" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\raw-body\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\raw-body\README.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\safe-buffer\index.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\safe-buffer\index.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\safe-buffer\LICENSE" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\safe-buffer\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\safe-buffer\README.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\safer-buffer\dangerous.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\safer-buffer\LICENSE" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\safer-buffer\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\safer-buffer\Porting-Buffer.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\safer-buffer\Readme.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\safer-buffer\safer.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\safer-buffer\tests.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\send\HISTORY.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\send\index.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\send\LICENSE" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\send\node_modules\ms\index.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\send\node_modules\ms\license.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\send\node_modules\ms\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\send\node_modules\ms\readme.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\send\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\send\README.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\serve-static\HISTORY.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\serve-static\index.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\serve-static\LICENSE" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\serve-static\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\serve-static\README.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\setprototypeof\index.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\setprototypeof\index.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\setprototypeof\LICENSE" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\setprototypeof\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\setprototypeof\README.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\setprototypeof\test\index.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\statuses\codes.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\statuses\HISTORY.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\statuses\index.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\statuses\LICENSE" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\statuses\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\statuses\README.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\toidentifier\index.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\toidentifier\LICENSE" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\toidentifier\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\toidentifier\README.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\type-is\HISTORY.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\type-is\index.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\type-is\LICENSE" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\type-is\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\type-is\README.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\AUTHORS.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\bin\tsc" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\bin\tsserver" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\CODE_OF_CONDUCT.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\CopyrightNotice.txt" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\cancellationToken.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\cs\diagnosticMessages.generated.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\de\diagnosticMessages.generated.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\diagnosticMessages.generated.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\es\diagnosticMessages.generated.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\fr\diagnosticMessages.generated.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\it\diagnosticMessages.generated.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\ja\diagnosticMessages.generated.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\ko\diagnosticMessages.generated.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\lib.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\lib.dom.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\lib.dom.iterable.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\lib.es2015.collection.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\lib.es2015.core.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\lib.es2015.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\lib.es2015.generator.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\lib.es2015.iterable.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\lib.es2015.promise.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\lib.es2015.proxy.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\lib.es2015.reflect.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\lib.es2015.symbol.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\lib.es2015.symbol.wellknown.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\lib.es2016.array.include.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\lib.es2016.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\lib.es2016.full.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\lib.es2017.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\lib.es2017.full.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\lib.es2017.intl.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\lib.es2017.object.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\lib.es2017.sharedmemory.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\lib.es2017.string.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\lib.es2017.typedarrays.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\lib.es2018.asynciterable.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\lib.es2018.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\lib.es2018.full.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\lib.es2018.intl.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\lib.es2018.promise.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\lib.es2018.regexp.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\lib.es2019.array.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\lib.es2019.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\lib.es2019.full.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\lib.es2019.object.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\lib.es2019.string.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\lib.es2019.symbol.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\lib.es2020.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\lib.es2020.full.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\lib.es2020.string.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\lib.es2020.symbol.wellknown.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\lib.es5.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\lib.es6.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\lib.esnext.array.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\lib.esnext.asynciterable.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\lib.esnext.bigint.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\lib.esnext.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\lib.esnext.full.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\lib.esnext.intl.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\lib.esnext.symbol.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\lib.scripthost.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\lib.webworker.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\lib.webworker.importscripts.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\pl\diagnosticMessages.generated.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\protocol.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\pt-br\diagnosticMessages.generated.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\README.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\ru\diagnosticMessages.generated.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\tr\diagnosticMessages.generated.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\tsc.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\tsserver.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\tsserverlibrary.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\tsserverlibrary.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\typescript.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\typescript.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\typescriptServices.d.ts" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\typescriptServices.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\typesMap.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\typingsInstaller.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\watchGuard.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\zh-cn\diagnosticMessages.generated.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\lib\zh-tw\diagnosticMessages.generated.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\LICENSE.txt" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\README.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\typescript\ThirdPartyNoticeText.txt" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\unpipe\HISTORY.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\unpipe\index.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\unpipe\LICENSE" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\unpipe\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\unpipe\README.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\utils-merge\.npmignore" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\utils-merge\index.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\utils-merge\LICENSE" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\utils-merge\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\utils-merge\README.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\vary\HISTORY.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\vary\index.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\vary\LICENSE" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\vary\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\vary\README.md" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\ws\browser.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\ws\index.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\ws\lib\buffer-util.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\ws\lib\constants.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\ws\lib\event-target.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\ws\lib\extension.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\ws\lib\permessage-deflate.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\ws\lib\receiver.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\ws\lib\sender.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\ws\lib\stream.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\ws\lib\validation.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\ws\lib\websocket-server.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\ws\lib\websocket.js" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\ws\LICENSE" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\ws\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\node_modules\ws\README.md" />
+    <None Remove="ClientApp\src\websocket-node-express\package-lock.json" />
+    <None Remove="ClientApp\src\websocket-node-express\package.json" />
+    <None Remove="ClientApp\src\websocket-node-express\quick-tip.PNG" />
+    <None Remove="ClientApp\src\websocket-node-express\server.js" />
+    <None Remove="ClientApp\src\websocket-node-express\tsconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Remove="ClientApp\src\app\dialog-window\dialog-content-window.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\gridlist-homepage-view\gridlist-view.component.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\Views\about\about.component.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\Views\homepage\home.component.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Data\DeserializeOnModels\ToForecastWeatherObject.cs" />
+    <Compile Include="Data\DeserializeOnModels\ToCurrentWeatherObject.cs" />
+    <Compile Include="Data\DeserializeOnModels\ToSensorReadObject.cs" />
+    <Compile Include="Data\Models\CurrentWeatherFromApi.cs" />
+    <Compile Include="Data\Models\DevDbContext.cs" />
+    <Compile Include="Data\Models\ForecastWeatherFromApi.cs" />
+    <Compile Include="Data\Models\SensorRead.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="ClientApp\src\assets\hotweather.svg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ClientApp\src\app\websocket\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
+    <!-- Ensure Node.js is installed -->
+    <Exec Command="node --version" ContinueOnError="true">
+      <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
+    </Exec>
+    <Error Condition="'$(ErrorCode)' != '0'" Text="Node.js is required to build and run this project. To continue, please install Node.js from https://nodejs.org/, and then restart your command prompt or IDE." />
+    <Message Importance="high" Text="Restoring dependencies using 'npm'. This may take several minutes..." />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
+  </Target>
+
+  <Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
+    <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build -- --prod" />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build:ssr -- --prod" Condition=" '$(BuildServerSideRenderer)' == 'true' " />
+
+    <!-- Include the newly-built files in the publish output -->
+    <ItemGroup>
+      <DistFiles Include="$(SpaRoot)dist\**; $(SpaRoot)dist-server\**" />
+      <DistFiles Include="$(SpaRoot)node_modules\**" Condition="'$(BuildServerSideRenderer)' == 'true'" />
+      <ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
+        <RelativePath>%(DistFiles.Identity)</RelativePath>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      </ResolvedFileToPublish>
+    </ItemGroup>
+  </Target>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <TypeScriptTarget>ES5</TypeScriptTarget>
+    <TypeScriptJSXEmit>React</TypeScriptJSXEmit>
+    <TypeScriptModuleKind>AMD</TypeScriptModuleKind>
+    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
+    <TypeScriptRemoveComments>False</TypeScriptRemoveComments>
+    <TypeScriptOutFile />
+    <TypeScriptOutDir />
+    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
+    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
+    <TypeScriptSourceMap>True</TypeScriptSourceMap>
+    <TypeScriptMapRoot />
+    <TypeScriptSourceRoot />
+  </PropertyGroup>
+
+</Project>
