@@ -28,7 +28,7 @@ namespace ProjektInz.Controllers
         /// Just temperature
         /// </summary>
         /// <returns></returns>
-        [HttpGet("SensorReadTemperature")]
+        [HttpGet("TodaySensorReadTemperature")]
         public IActionResult TodaySensorReadTemperature()
         {
             DateTime date = DateTime.Now.Date;

@@ -1,8 +1,24 @@
-<chart-view [lineChartLabels]="chartLabel" [lineChartData]="chart" [lineChartColors]="axesColors"></chart-view>
+<!--<chart-view [lineChartLabels]="chartLabel" [lineChartData]="chart" > </chart-view>-->
+<div class="flex">
+  <div class="flex-item">
+    <div style="display:block">
+      <canvas baseChart #baseChart="base-chart"
+              [datasets]="chart"
+              [labels]="chartLabel"
+              [options]="lineChartOptions"
+              [colors]="axesColors"
+              [legend]="lineChartLegend"
+              [chartType]="lineChartType"
+              (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)"></canvas>
+    </div>
+  </div>
+</div>
 <mat-form-field>
   <mat-label>Wybierz datę</mat-label>
   <input matInput [matDatepicker]="picker" [formControl]="date" (dateChange)="dateChange('change',$event)">
   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
   <mat-datepicker #picker></mat-datepicker>
 </mat-form-field>
+<button mat-button mat-raised-button color="primary" (click)="changeColor()">Zmień kolor</button>
 <!--<chart-view [chart1]="value1" (changeAxis1)="getDataFromApi()"></chart-view>-->

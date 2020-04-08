@@ -13,8 +13,13 @@ export class MainNavComponent {
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches)
-    );
-
+  );
   constructor(private breakpointObserver: BreakpointObserver) {}
 
+  public header: string = "Aktualna pogoda";
+  setHeader(text:string) {
+    this.header = text;
+  }
+
 }
+

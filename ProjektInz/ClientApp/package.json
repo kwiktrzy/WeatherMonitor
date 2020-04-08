@@ -32,7 +32,7 @@
     "@progress/kendo-theme-default": "^4.2.0",
     "@stomp/stompjs": "^5.4.2",
     "@types/jest": "^24.9.0",
-    "angular-fusioncharts": "^3.0.4",
+    "angular-gauge-chart": "^0.7.2",
     "bootstrap": "^4.3.1",
     "chart.js": "^2.8.0",
     "express": "^4.17.1",

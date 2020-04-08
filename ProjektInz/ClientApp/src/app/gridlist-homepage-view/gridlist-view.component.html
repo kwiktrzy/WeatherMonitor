@@ -5,11 +5,7 @@
           Temperatura
         </mat-card-title>
       </mat-card-header>
-      <!--<kendo-arcgauge [value]="value" [colors]="colors" [scale]="{min: 0,max: 100 }">-->
-        <!--<ng-template kendoArcGaugeCenterTemplate let-value="value" let-color="color">-->
-         <!-- <span [style.color]="color">{{ currentTemperature }}%</span>-->
-        <!--</ng-template>
-      </kendo-arcgauge>-->
+      <app-rating-meter [needleValue]="currentTemperatureConverted" [centralLabel]="labelTemperatureGauge" [options]="temperatureOptions"></app-rating-meter>
     </mat-card>
     <mat-card class="card-component">
       <mat-card-header>
@@ -17,41 +13,33 @@
           Wilgotność
         </mat-card-title>
       </mat-card-header>
-      <!--<kendo-arcgauge [value]="value" [colors]="colors" [scale]="{min: 0,max: 100 }">-->
-        <!--<ng-template kendoArcGaugeCenterTemplate let-value="value" let-color="color">-->
-          <!--<span [style.color]="color">{{ currentHumidity }}%</span>-->
-        <!--</ng-template>
-      </kendo-arcgauge>-->
+      <app-rating-meter [needleValue]="currentHumidity"
+                      [centralLabel]="labelHumidityGauge"
+                      [options]="humidityOptions">
+      </app-rating-meter>
     </mat-card>
     <mat-card class="card-component">
       <mat-card-header>
         <mat-card-title>
           Ciśnienie
-          <!--<button mat-icon-button aria-label="swap view">
-            <mat-icon>timeline</mat-icon>
-          </button>-->
         </mat-card-title>
       </mat-card-header>
-      <!--<kendo-arcgauge [value]="value" [colors]="colors" [scale]="{min: 0,max: 100 }">-->
-        <!--<ng-template kendoArcGaugeCenterTemplate let-value="value" let-color="color">-->
-          <!--<span [style.color]="color">{{ currentPressure }}%</span>
-        </ng-template>
-      </kendo-arcgauge>-->
+      <app-rating-meter
+                      [needleValue]="currentPressureConverted"
+                      [centralLabel]="labelPressureGauge"
+                      [options]="pressureOptions">
+      </app-rating-meter>
     </mat-card>
     <mat-card class="card-component">
       <mat-card-header>
         <mat-card-title>
           Wysokość
-          <!--<button mat-icon-button aria-label="swap view">
-            <mat-icon>timeline</mat-icon>
-          </button>-->
         </mat-card-title>
       </mat-card-header>
-      <!--<kendo-arcgauge [value]="value" [colors]="colors" [scale]="{min: 0,max: 100 }">
-        <ng-template kendoArcGaugeCenterTemplate let-value="value" let-color="color">
-          <span [style.color]="color">{{ currentAltitude }}%</span>
-        </ng-template>
-      </kendo-arcgauge>-->
+      <app-rating-meter [needleValue]="currentAltitudeConverted"
+                      [centralLabel]="labelAltitudeGauge"
+                      [options]="altitudeOptions">
+      </app-rating-meter>
     </mat-card>
   </div>
   <div class="charts-container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="space-evenly">
@@ -62,13 +50,14 @@
         </mat-card-title>
       </mat-card-header>
      <chart-view [lineChartLabels]="todayTemperatureLabel" [lineChartData]="todayTemperatureData"></chart-view>
-    </mat-card><mat-card class="card-component-chart">
+    </mat-card>
+<mat-card class="card-component-chart">
   <mat-card-header>
     <mat-card-title>
       Wilgotność godzinowo
     </mat-card-title>
   </mat-card-header>
-  <chart-view [lineChartLabels]="todayTemperatureLabel" [lineChartData]="todayHumidityData "></chart-view>
+  <chart-view [lineChartLabels]="todayTemperatureLabel" [lineChartData]="todayHumidityData"></chart-view>
 </mat-card>
  </div>
 

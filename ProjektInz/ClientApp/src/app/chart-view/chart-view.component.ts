@@ -8,10 +8,10 @@ import { Color, BaseChartDirective, Label } from 'ng2-charts';
   styleUrls: ['./chart-view.component.css']
 })
 export class ChartViewComponent implements OnInit {
-
+  //TODO: REFACTOR CODE AND REMOVE THIS COMPONENT. Colors works crappy
   @Input() public lineChartLabels: Label[] = ['0'];
   @Input() public lineChartData: ChartDataSets[];
-  @Input() public lineChartColors: Color[];
+   public lineChartColors: Color[] = [];
 
   constructor() {
   }

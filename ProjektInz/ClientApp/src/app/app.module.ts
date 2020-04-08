@@ -19,15 +19,14 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatCardModule } from '@angular/material/card';
 import { ChartsModule, Color } from 'ng2-charts'
 import { MatNativeDateModule } from '@angular/material';
-
-
 import { AboutComponent } from './Views/about/about.component';
 import { HomeComponent } from './Views/homepage/home.component';
 import { GridListView } from './gridlist-homepage-view/gridlist-view.component';
 import { ChartViewComponent } from './chart-view/chart-view.component';
-
 import { WebsocketService } from './websocket/websocket.service';
 import { AnalyticsComponent } from './Views/analytics/analytics.component';
+import { RatingMeterComponent } from './rating-meter/rating-meter.component';
+import { GaugeChartModule } from 'angular-gauge-chart'
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,10 +38,11 @@ import { AnalyticsComponent } from './Views/analytics/analytics.component';
     GridListView,
     ChartViewComponent,
     AnalyticsComponent,
+    RatingMeterComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
-    HttpClientModule,
+    HttpClientModule, GaugeChartModule,
     FormsModule,
     ReactiveFormsModule,
     MatDatepickerModule,
